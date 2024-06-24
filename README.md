@@ -18,8 +18,8 @@
 
 ## items テーブル
 **アソシエーション**:
- - `belongs_to :users`
- - `has_one :purchases, dependent: :destroy`
+ - `belongs_to :user`
+ - `has_one :purchase, dependent: :destroy`
 
 | Column             | Type       | Options     |
 | ------------------ | ---------- | ----------- |
@@ -36,9 +36,9 @@
 
 ## purchases テーブル
 **アソシエーション**:
- - `belongs_to :users`
- - `has_one :items`
- - `has_one :addresses, dependent: :destroy`
+ - `belongs_to :user`
+ - `has_one :item`
+ - `has_one :addresse, dependent: :destroy`
 
 | Column             | Type       | Options     |
 | ------------------ | ------     | ----------- |
@@ -47,7 +47,7 @@
 
 ## addresses テーブル
 **アソシエーション**:
- - `has_one :purchases`
+ - `belongs_to :purchase`
 
 | Column             | Type       | Options     |
 | ------------------ | ------     | ----------- |
@@ -56,5 +56,5 @@
 | city               | string     | null: false |
 | street_address     | string     | null: false |
 | building_name      | string     |             |
-| phone_number       | string    | null: false |
+| phone_number       | string     | null: false |
 | purchase           | references | null: false, foreign_key: true |
