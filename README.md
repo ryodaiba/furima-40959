@@ -16,7 +16,7 @@
 ## items テーブル
 
 | Column             | Type       | Options     |
-| item_name           | string     | null: false |
+| item_name          | string     | null: false |
 | description        | text       | null: false |
 | category           | integer    | null: false |
 | condition          | integer    | null: false |
