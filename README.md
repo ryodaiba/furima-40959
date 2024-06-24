@@ -2,8 +2,8 @@
 
 ## users テーブル
 **アソシエーション**:
- - `has_many :items, dependent: :destroy`
- - `has_many :purchases, dependent: :destroy`
+ - `has_many :items`
+ - `has_many :purchases`
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
@@ -13,13 +13,13 @@
 | last_name          | string | null: false |
 | first_name         | string | null: false |
 | last_name_kana     | string | null: false |
-| fitst_name_kana    | string | null: false |
+| first_name_kana    | string | null: false |
 | dob                | date   | null: false |
 
 ## items テーブル
 **アソシエーション**:
  - `belongs_to :user`
- - `has_one :purchase, dependent: :destroy`
+ - `has_one :purchase`
 
 | Column             | Type       | Options     |
 | ------------------ | ---------- | ----------- |
@@ -37,8 +37,8 @@
 ## purchases テーブル
 **アソシエーション**:
  - `belongs_to :user`
- - `has_one :item`
- - `has_one :addresse, dependent: :destroy`
+ - `belongs_to :item`
+ - `has_one :addresses`
 
 | Column             | Type       | Options     |
 | ------------------ | ------     | ----------- |
