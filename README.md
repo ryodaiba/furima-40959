@@ -24,11 +24,18 @@
 | shipping_from      | integer    | null: false |
 | shipping_days      | integer    | null: false |
 | price              | integer    | null: false |
-| sold               | integer    |             |
 | user_id            | references | null: false, foreign_key: true |
 
 
 ## purchasers テーブル
+
+| Column             | Type       | Options     |
+| ------------------ | ------     | ----------- |
+| item_id            | references | null: false, foreign_key: true |
+| user_id            | references | null: false, foreign_key: true |
+| address_id         | references | null: false, foreign_key: true |
+
+## addresses テーブル
 
 | Column             | Type       | Options     |
 | ------------------ | ------     | ----------- |
@@ -40,3 +47,4 @@
 | phone_number       | integer    | null: false |
 | user_id            | references | null: false, foreign_key: true |
 | item_id            | references | null: false, foreign_key: true |
+| purchase_id        | references | null: false, foreign_key: true |
