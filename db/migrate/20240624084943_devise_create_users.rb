@@ -11,7 +11,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :first_name,         null: false, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ }
       t.string :last_name_kana,     null: false, format: { with: /\A[\p{katakana}\u{30fc}]+\z/ }
       t.string :first_name_kana,    null: false, format: { with: /\A[\p{katakana}\u{30fc}]+\z/ }
-      t.date   :dob,                null: false
+      t.date   :birth_date,         null: false
 
       ## Recoverable
       t.string   :reset_password_token

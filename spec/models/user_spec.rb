@@ -129,9 +129,9 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("First name kana は全角カタカナで入力してください")
       end
       it 'dobが空では登録できない' do
-        @user.dob = ''
+        @user.birth_date = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include("Dob can't be blank")
+        expect(@user.errors.full_messages).to include("Birth date can't be blank")
       end
     end
   end
