@@ -7,8 +7,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
       t.string :nickname,           null: false
-      t.string :last_name,          null: false, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ }
-      t.string :first_name,         null: false, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ }
+      t.string :last_name,          null: false, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
+      t.string :first_name,         null: false, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
       t.string :last_name_kana,     null: false, format: { with: /\A[\p{katakana}\u{30fc}]+\z/ }
       t.string :first_name_kana,    null: false, format: { with: /\A[\p{katakana}\u{30fc}]+\z/ }
       t.date   :birth_date,         null: false
