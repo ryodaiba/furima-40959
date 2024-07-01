@@ -129,8 +129,6 @@
     <ul class='item-lists'>
         <%= render partial: 'item', collection: @items %>
     </ul >
-      <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
-      <%# 商品がある場合は表示されないようにしましょう %>
     <ul class='item-lists'>
       <% if @items.blank? %>
         <li class='list'>
@@ -138,11 +136,9 @@
           <div class='item-img-content'>
             <%= image_tag "item-sample.png", class: "item-img" %>
 
-            <%# 商品が売れていればsold outを表示しましょう %>
             <div class='sold-out'>
               <span>Sold Out!!</span>
             </div>
-            <%# //商品が売れていればsold outを表示しましょう %>
 
           </div>
           <div class='item-info'>
@@ -177,9 +173,6 @@
           <% end %>
         </li>
       <% end %>
-    </ul >
-      <%# //商品がある場合は表示されないようにしましょう %>
-      <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>
     </ul>
   </div>
   <%# /商品一覧 %>
