@@ -7,15 +7,17 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shipping_day
   has_one_attached :image
+  has_one :purchase
 
-  validates :image,           presence: true
-  validates :item_name,       presence: true
-  validates :description,     presence: true
-  validates :category_id,     presence: true, numericality: { other_than: 1, message: 'cant be blank' }
-  validates :condition_id,    presence: true, numericality: { other_than: 1, message: 'cant be blank' }
-  validates :shipping_fee_id, presence: true, numericality: { other_than: 1, message: 'cant be blank' }
-  validates :prefecture_id,   presence: true, numericality: { other_than: 1, message: 'cant be blank' }
-  validates :shipping_day_id, presence: true, numericality: { other_than: 1, message: 'cant be blank' }
-  validates :price,           presence: true,
-                              numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+  with_options presence: true do
+    validates :image
+    validates :item_name
+    validates :description
+    validates :category_id,     numericality: { other_than: 1, message: 'cant be blank' }
+    validates :condition_id,    numericality: { other_than: 1, message: 'cant be blank' }
+    validates :shipping_fee_id, numericality: { other_than: 1, message: 'cant be blank' }
+    validates :prefecture_id,   numericality: { other_than: 1, message: 'cant be blank' }
+    validates :shipping_day_id, numericality: { other_than: 1, message: 'cant be blank' }
+    validates :price,           numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+  end
 end
