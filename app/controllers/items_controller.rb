@@ -2,8 +2,6 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :destroy]
-  before_action :set_purchase, only: [:show, :edit]
-  before_action :redirect_if_purchased, only: [:show, :edit]
 
   def index
     @items = Item.includes(:purchase).all.order('created_at DESC')
@@ -23,9 +21,14 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @purchase = Purchase.find_by(item_id: @item.id)
   end
 
   def edit
+    @purchase = Purchase.find_by(item_id: @item.id)
+    if current_user = @item.user && @purchase.present?
+      redirect_to root_path
+    end
   end
   
   def update
@@ -57,15 +60,4 @@ class ItemsController < ApplicationController
       redirect_to root_path
     end
   end
-
-  def set_purchase
-    @purchase == Purchase.find_by(item_id: @item.id)
-  end
-
-  def redirect_if_purchased
-    if current_user == @item.user && @purchase.present?
-      redirect_to root_path
-    end
-  end
-
 end
