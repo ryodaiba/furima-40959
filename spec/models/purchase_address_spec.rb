@@ -2,13 +2,12 @@ require 'rails_helper'
 
 RSpec.describe PurchaseAddress, type: :model do
   before do
-    user = FactoryBot.create(:user)
-    item = FactoryBot.create(:item)
-    @purchase_address = FactoryBot.build(:purchase_address, user_id: user.id, item_id: item.id)
-  end
-  describe '配送先情報の保存' do
+    @purchase_address = FactoryBot.build(:purchase_address)
 
-    context '配送先情報が保存できる場合' do
+  end
+
+  describe '購入情報の保存' do
+    context '購入情報が保存できる場合' do
       it '全ての情報が正しく入力されていれば保存できる' do
         expect(@purchase_address).to be_valid
       end
@@ -18,7 +17,12 @@ RSpec.describe PurchaseAddress, type: :model do
       end
     end
 
-    context '配送先情報が保存できない場合' do
+    context '購入情報が保存できない場合' do
+      it 'tokenが空だと保存できない' do
+        @purchase_address.token = ''
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
+      end
       it 'postal_codeが空だと保存できない' do
         @purchase_address.postal_code = ''
         @purchase_address.valid?
@@ -52,12 +56,12 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'phone_numberが12桁以上だと保存できない' do
         @purchase_address.phone_number = '090123456789'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid.")
       end
       it 'phone_numberが英数混合だと保存できない' do
         @purchase_address.phone_number = '0901234abcd'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. Input only number")
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid.")
       end
       it 'phone_numberが全角数字だと保存できない' do
         @purchase_address.phone_number = '０９０１２３４５６７８９'
@@ -67,7 +71,7 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'phone_numberが9桁以下だと保存できない' do
         @purchase_address.phone_number = '090123456'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is too short")
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid.")
       end
     end
   end
