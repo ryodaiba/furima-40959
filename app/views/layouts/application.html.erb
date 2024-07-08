@@ -12,6 +12,7 @@
 
   <body>
     <%= yield %>
-    <%= javascript_include_tag "calculate_profit" %>
+    <%= javascript_include_tag "calculate_profit", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "card", "data-turbo-track": "reload" %>
   </body>
 </html>
