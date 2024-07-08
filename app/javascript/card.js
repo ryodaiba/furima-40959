@@ -2,8 +2,9 @@ window.addEventListener('turbo:load', () => {
   console.log("turbo:loadイベントがトリガーされました。");
 
   const pay = () => {
+    const publicKey = gon.public_key
     if (typeof window.payjpInstance === 'undefined') {
-      window.payjpInstance = Payjp('pk_test_ca801ca40543170e5de53b35'); // PAY.JPテスト公開鍵
+      window.payjpInstance = Payjp(publicKey); // PAY.JPテスト公開鍵
     }
     const payjp = window.payjpInstance;
     

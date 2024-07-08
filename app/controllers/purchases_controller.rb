@@ -2,8 +2,12 @@ class PurchasesController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def new
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @item = Item.find(params[:item_id])
     @purchase_address = PurchaseAddress.new
+    if current_user.id == @item.user_id || @item.purchase.present?
+      redirect_to root_path
+    end
   end
 
   def create
@@ -25,7 +29,7 @@ class PurchasesController < ApplicationController
   end
 
   def pay_item(amount, token)
-    Payjp.api_key = "sk_test_12961de93ee1b02f21d39f65" # PAY.JPシークレットキー
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] # PAY.JPシークレットキー
     Payjp::Charge.create(
       amount: amount,           # 支払い金額
       card: token,              # token
