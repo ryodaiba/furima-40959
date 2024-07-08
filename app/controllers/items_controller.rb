@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   before_action :move_to_index, only: [:edit, :destroy]
 
   def index
-    @items = Item.all.order('created_at DESC')
+    @items = Item.includes(:purchase).all.order('created_at DESC')
   end
 
   def new
@@ -21,9 +21,14 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @purchase = Purchase.find_by(item_id: @item.id)
   end
 
   def edit
+    @purchase = Purchase.find_by(item_id: @item.id)
+    if current_user = @item.user && @purchase.present?
+      redirect_to root_path
+    end
   end
   
   def update
@@ -55,5 +60,4 @@ class ItemsController < ApplicationController
       redirect_to root_path
     end
   end
-
 end

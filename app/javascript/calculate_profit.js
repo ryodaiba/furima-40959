@@ -1,10 +1,19 @@
-function calculateProfit() {
-  const price = document.getElementById('item-price').value;
-  const commission = Math.floor(price * 0.1);
-  const profit = Math.floor(price - commission);
-  document.getElementById('add-tax-price').textContent = commission;
-  document.getElementById('profit').textContent = profit;
-}
+window.addEventListener('turbo:load', () => {
+  console.log("Turbo load event triggered for calculate_profit.js");
 
+  const calculateProfit = () => {
+    const priceElement = document.getElementById('item-price');
+    if (!priceElement) return;
 
-window.addEventListener('turbo:load', item);
+    const price = priceElement.value;
+    const commission = Math.floor(price * 0.1);
+    const profit = Math.floor(price - commission);
+    document.getElementById('add-tax-price').textContent = commission;
+    document.getElementById('profit').textContent = profit;
+  };
+
+  const priceElement = document.getElementById('item-price');
+  if (priceElement) {
+    priceElement.addEventListener('input', calculateProfit);
+  }
+});

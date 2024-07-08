@@ -141,6 +141,19 @@
 
 /* /商品の概要 */
 
+.item-img-content {
+  position: relative;
+}
+
+.sold-out {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  background-color: crimson;
+  transform: skewY(-10deg);
+}
+
 .comment-box {
   width: 40vw;
   background-color: #fff;
