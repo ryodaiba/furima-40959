@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe PurchaseAddress, type: :model do
   before do
-    @purchase_address = FactoryBot.build(:purchase_address)
-
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @purchase_address = FactoryBot.build(:purchase_address, user_id: user.id, item_id: item.id)
   end
 
   describe '購入情報の保存' do
@@ -34,7 +35,7 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include("Postal code is invalid. Enter it as follows (e.g. 123-4567)")
       end
       it 'prefecture_idが空だと保存できない' do
-        @purchase_address.prefecture_id = ''
+        @purchase_address.prefecture_id = '1'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Prefecture can't be blank")
       end
@@ -72,6 +73,16 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.phone_number = '090123456'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number is invalid.")
+      end
+      it 'user_idが空だと保存できない' do
+        @purchase_address.user_id = ''
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空だと保存できない' do
+        @purchase_address.item_id = ''
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
