@@ -25,7 +25,6 @@ window.addEventListener('turbo:load', () => {
 
       payjp.createToken(numberElement).then(function (response) {
         if (response.error) {
-          console.error("トークン作成中にエラーが発生しました：", response.error.message); // エラーメッセージをコンソールに表示
           alert("カード情報が正しくありません。もう一度確認してください。");
         } else {
           const token = response.id;
